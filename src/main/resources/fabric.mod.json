@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "bbs-fbx-addon",
+  "version": "${version}",
+  "name": "BBS Fbx Addon",
+  "description": "compatibility with fbx models for use in BBS CML EDITION",
+  "authors": [
+    "ElGatoPro300",
+    "Eleeter"
+  ],
+  "contact": {
+    "homepage": "https://discord.gg/MAHVQBSce6",
+    "sources": "https://github.com/ElGatoPro300/bbs-fbx-addon"
+  },
+  "license": "MIT",
+  "icon": "assets/bbs_fbx/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "bbs-addon": [
+      "elgatopro300.bbsfbx.BBSFbxAddon"
+    ],
+    "bbs-addon-client": [
+      "elgatopro300.bbsfbx.client.BBSFbxClientAddon"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "bbs": ">=1.10.0"
+  }
+}
