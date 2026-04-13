@@ -3,7 +3,7 @@
   "id": "bbs-fbx-addon",
   "version": "${version}",
   "name": "BBS Fbx Addon",
-  "description": "compatibility with fbx models for use in BBS CML EDITION",
+  "description": "Fbx model compatibility for BBS CML EDITION",
   "authors": [
     "ElGatoPro300",
     "Eleeter"
@@ -25,7 +25,7 @@
   },
   "depends": {
     "fabricloader": ">=0.14.21",
-    "minecraft": "~1.20.1",
+    "minecraft": ">=1.20.1 <=1.21.4",
     "java": ">=17",
     "bbs": ">=1.10.0"
   }
