@@ -70,12 +70,12 @@ dependencies {
 	modImplementation "org.anarres:jcpp:1.4.14"
 	modImplementation "io.github.douira:glsl-transformer:2.0.0-pre13"
 
-	// FBX Implementation
-	implementation(include("org.lwjgl:lwjgl-assimp:3.3.2"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-windows"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-linux"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-macos"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-macos-arm64"))
+	// FBX Implementation: bundle only the Assimp module (matching Minecraft LWJGL version).
+	implementation(include("org.lwjgl:lwjgl-assimp:3.3.1"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.1:natives-windows"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.1:natives-linux"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.1:natives-macos"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.1:natives-macos-arm64"))
 }
 
 processResources {

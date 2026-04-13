@@ -30,9 +30,7 @@ import org.lwjgl.assimp.AIScene;
 import org.lwjgl.assimp.Assimp;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class FBXModelLoader implements IModelLoader
 {
@@ -43,7 +41,7 @@ public class FBXModelLoader implements IModelLoader
 
         for (Link link : links)
         {
-            if (link.path.endsWith(".fbx"))
+            if (link.path.toLowerCase().endsWith(".fbx"))
             {
                 fbxLink = link;
                 break;
@@ -209,8 +207,10 @@ public class FBXModelLoader implements IModelLoader
             modelInstance.applyConfig(config);
             return modelInstance;
 
-        } catch (Exception e)
+        }
+        catch (Throwable e)
         {
+            System.err.println("Failed to load FBX model for " + id + ": " + e.getClass().getSimpleName() + " - " + e.getMessage());
             e.printStackTrace();
         }
         return null;
