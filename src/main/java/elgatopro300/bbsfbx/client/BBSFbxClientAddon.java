@@ -1,6 +1,5 @@
 package elgatopro300.bbsfbx.client;
 
-import elgatopro300.bbsfbx.model.fbx.loaders.FBXModelLoader;
 import mchorse.bbs_mod.addons.BBSClientAddon;
 import mchorse.bbs_mod.events.Subscribe;
 import mchorse.bbs_mod.events.register.RegisterL10nEvent;
@@ -8,10 +7,11 @@ import mchorse.bbs_mod.events.register.RegisterModelLoadersEvent;
 import mchorse.bbs_mod.l10n.L10n;
 import mchorse.bbs_mod.resources.Link;
 
+import java.util.List;
+
+import elgatopro300.bbsfbx.model.fbx.loaders.FBXModelLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class BBSFbxClientAddon extends BBSClientAddon
 {

@@ -1,19 +1,18 @@
 package elgatopro300.bbsfbx.model.fbx.loaders;
 
-import elgatopro300.bbsfbx.model.fbx.FBXConverter;
-import mchorse.bbs_mod.cubic.data.animation.Animation;
-import mchorse.bbs_mod.cubic.data.animation.AnimationPart;
-import mchorse.bbs_mod.bobj.BOBJKeyframe;
-import mchorse.bbs_mod.bobj.BOBJBone;
-import mchorse.bbs_mod.bobj.BOBJGroup;
-import mchorse.bbs_mod.bobj.BOBJChannel;
-import mchorse.bbs_mod.bobj.BOBJLoader;
 import mchorse.bbs_mod.bobj.BOBJAction;
 import mchorse.bbs_mod.bobj.BOBJArmature;
+import mchorse.bbs_mod.bobj.BOBJBone;
+import mchorse.bbs_mod.bobj.BOBJChannel;
+import mchorse.bbs_mod.bobj.BOBJGroup;
+import mchorse.bbs_mod.bobj.BOBJKeyframe;
+import mchorse.bbs_mod.bobj.BOBJLoader;
 import mchorse.bbs_mod.bobj.BOBJLoader.BOBJData;
 import mchorse.bbs_mod.bobj.BOBJLoader.BOBJMesh;
 import mchorse.bbs_mod.bobj.BOBJLoader.CompiledData;
 import mchorse.bbs_mod.cubic.ModelInstance;
+import mchorse.bbs_mod.cubic.data.animation.Animation;
+import mchorse.bbs_mod.cubic.data.animation.AnimationPart;
 import mchorse.bbs_mod.cubic.data.animation.Animations;
 import mchorse.bbs_mod.cubic.model.ModelManager;
 import mchorse.bbs_mod.cubic.model.bobj.BOBJModel;
@@ -24,13 +23,20 @@ import mchorse.bbs_mod.math.molang.expressions.MolangExpression;
 import mchorse.bbs_mod.math.molang.expressions.MolangValue;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.utils.keyframes.KeyframeChannel;
+
 import org.joml.Vector2d;
 import org.joml.Vector3f;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.assimp.AIPropertyStore;
 import org.lwjgl.assimp.AIScene;
 import org.lwjgl.assimp.Assimp;
 
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.Collection;
+
+import elgatopro300.bbsfbx.model.fbx.FBXConverter;
 
 public class FBXModelLoader implements IModelLoader
 {
@@ -65,11 +71,11 @@ public class FBXModelLoader implements IModelLoader
             byte[] bytes = stream.readAllBytes();
             stream.close();
 
-            java.nio.ByteBuffer buffer = org.lwjgl.BufferUtils.createByteBuffer(bytes.length);
+            ByteBuffer buffer = BufferUtils.createByteBuffer(bytes.length);
             buffer.put(bytes);
             buffer.flip();
 
-            org.lwjgl.assimp.AIPropertyStore store = Assimp.aiCreatePropertyStore();
+            AIPropertyStore store = Assimp.aiCreatePropertyStore();
             Assimp.aiSetImportPropertyInteger(store, Assimp.AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, 0);
             Assimp.aiSetImportPropertyFloat(store, Assimp.AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY, 1.0f);
 
@@ -81,7 +87,7 @@ public class FBXModelLoader implements IModelLoader
                             Assimp.aiProcess_GenSmoothNormals |
                             Assimp.aiProcess_OptimizeGraph |
                             Assimp.aiProcess_PopulateArmatureData,
-                    (java.nio.ByteBuffer) null,
+                    (ByteBuffer) null,
                     store);
 
             if (scene == null)

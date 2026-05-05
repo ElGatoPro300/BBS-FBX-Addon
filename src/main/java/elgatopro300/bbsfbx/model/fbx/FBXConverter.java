@@ -13,6 +13,7 @@ import mchorse.bbs_mod.bobj.BOBJLoader.Weight;
 import org.joml.Matrix4f;
 import org.joml.Vector2d;
 import org.joml.Vector3f;
+
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.AIBone;
 import org.lwjgl.assimp.AIMaterial;
@@ -24,7 +25,6 @@ import org.lwjgl.assimp.AIString;
 import org.lwjgl.assimp.AIVector3D;
 import org.lwjgl.assimp.AIVertexWeight;
 import org.lwjgl.assimp.Assimp;
-
 
 import java.nio.IntBuffer;
 import java.util.ArrayList;
