@@ -61,34 +61,42 @@ public class FBXModelLoader implements IModelLoader
 
         try
         {
-            InputStream stream = models.provider.getAsset(fbxLink);
-
-            if (stream == null)
+            byte[] bytes;
+            try (InputStream stream = models.provider.getAsset(fbxLink))
             {
-                return null;
+                if (stream == null)
+                {
+                    return null;
+                }
+                bytes = stream.readAllBytes();
             }
-
-            byte[] bytes = stream.readAllBytes();
-            stream.close();
 
             ByteBuffer buffer = BufferUtils.createByteBuffer(bytes.length);
             buffer.put(bytes);
             buffer.flip();
 
             AIPropertyStore store = Assimp.aiCreatePropertyStore();
-            Assimp.aiSetImportPropertyInteger(store, Assimp.AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, 0);
-            Assimp.aiSetImportPropertyFloat(store, Assimp.AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY, 1.0f);
+            AIScene scene = null;
+            try
+            {
+                Assimp.aiSetImportPropertyInteger(store, Assimp.AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, 0);
+                Assimp.aiSetImportPropertyFloat(store, Assimp.AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY, 1.0f);
 
-            AIScene scene = Assimp.aiImportFileFromMemoryWithProperties(buffer,
-                    Assimp.aiProcess_Triangulate |
-                            Assimp.aiProcess_FlipUVs |
-                            Assimp.aiProcess_LimitBoneWeights |
-                            Assimp.aiProcess_JoinIdenticalVertices |
-                            Assimp.aiProcess_GenSmoothNormals |
-                            Assimp.aiProcess_OptimizeGraph |
-                            Assimp.aiProcess_PopulateArmatureData,
-                    (ByteBuffer) null,
-                    store);
+                scene = Assimp.aiImportFileFromMemoryWithProperties(buffer,
+                        Assimp.aiProcess_Triangulate |
+                                Assimp.aiProcess_FlipUVs |
+                                Assimp.aiProcess_LimitBoneWeights |
+                                Assimp.aiProcess_JoinIdenticalVertices |
+                                Assimp.aiProcess_GenSmoothNormals |
+                                Assimp.aiProcess_OptimizeGraph |
+                                Assimp.aiProcess_PopulateArmatureData,
+                        (ByteBuffer) null,
+                        store);
+            }
+            finally
+            {
+                Assimp.aiReleasePropertyStore(store);
+            }
 
             if (scene == null)
             {
