@@ -53,19 +53,19 @@ dependencies {
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
-	modImplementation "maven.modrinth:sodium:mc1.20.4-0.5.8"
-	modImplementation "maven.modrinth:iris:1.7.2+1.20.4"
-	modImplementation "maven.modrinth:bbs-cml-edition:1.10.3-1.20.4"
+	modImplementation "maven.modrinth:sodium:mc1.21.1-0.6.13-fabric"
+	modImplementation "maven.modrinth:iris:1.8.8+1.21.1-fabric"
+	modImplementation "maven.modrinth:bbs-cml-edition:1.10.3-1.21.1"
 
 	modImplementation "org.anarres:jcpp:1.4.14"
 	modImplementation "io.github.douira:glsl-transformer:2.0.0-pre13"
 
 	// FBX Implementation: bundle only the Assimp module (matching Minecraft LWJGL version).
-	implementation(include("org.lwjgl:lwjgl-assimp:3.3.2"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-windows"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-linux"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-macos"))
-	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.2:natives-macos-arm64"))
+	implementation(include("org.lwjgl:lwjgl-assimp:3.3.3"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.3:natives-windows"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.3:natives-linux"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.3:natives-macos"))
+	runtimeOnly(include("org.lwjgl:lwjgl-assimp:3.3.3:natives-macos-arm64"))
 }
 
 processResources {
@@ -77,7 +77,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
@@ -86,8 +86,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
